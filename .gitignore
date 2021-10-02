@@ -1,0 +1,6 @@
+node_modules
+*googleapi.json
+*.env
+*.mp3
+*.jpg
+*.lnk
