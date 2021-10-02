@@ -13,7 +13,7 @@ const prefix = "!";
 
 // Google Cloud setup
 // make sure we authenticate for the google api
-process.env.GOOGLE_APPLICATION_CREDENTIALS = "google-credentials.json";
+//process.env.GOOGLE_APPLICATION_CREDENTIALS = "google-credentials.json";
 
 // !help counter (for fun)
 let helpCounter = 0;
