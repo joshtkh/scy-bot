@@ -4,7 +4,7 @@
   "description": "Moderation bot for discord.",
   "main": "main.js",
   "scripts": {
-    "start": "node .",
+    "start": "node ./main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Josh H",
