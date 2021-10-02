@@ -13,7 +13,7 @@ const prefix = "!";
 
 // Google Cloud setup
 // make sure we authenticate for the google api
-process.env.GOOGLE_APPLICATION_CREDENTIALS = "discordbottts-googleapi.json";
+process.env.GOOGLE_APPLICATION_CREDENTIALS = "discordbottts-googleapi.json" || "google-credentials.json";
 
 // !help counter (for fun)
 let helpCounter = 0;
