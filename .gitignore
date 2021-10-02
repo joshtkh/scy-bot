@@ -1,5 +1,5 @@
 node_modules
-*googleapi.json
+*google-credentials.json
 *.env
 *.mp3
 *.jpg
