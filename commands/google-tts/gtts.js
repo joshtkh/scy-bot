@@ -6,6 +6,7 @@ const util = require("util");
 // consts
 const voiceTypeOptCode = "-g";
 const nationalityOptCode = "-n";
+const speakingRateOptCode = "-s";
 // create an enum to store references to the voice types
 const voicesEnum = {
     "AU" : {
@@ -71,21 +72,24 @@ module.exports = {
         if(!voiceChannel) { return message.channel.send("Sooooo, you need to be in a voice channel to execute that command... now we both look dumb, huh?"); }
         if(message.guild.me.voice.channel) { return message.channel.send("I am already playing!!"); }
 
-        // TODO HERE: allow user to change the voice gender/nationality with options.
+        // This allows user to change the voice gender/nationality with options.
         // usage ex: !gtts [nationality] [gender+type]
         // EX: !gtts -n us -g m2 (text)
         // EX: !gtts -n us -g f (text)
         // EX: !gtts -n us (text)
         // EX: !gtts -g f (text)
-
         // set up array to store any provided options
         const options = {};
         while(args[0].startsWith("-")) {
             options[args.shift()] = args.shift(); // stores the options in a dictionary type object where option:value
         }
         // now we determine what options were given
-        let voiceType = (voiceTypeOptCode in options) ? options[voiceTypeOptCode] : "m1";
+        const voiceType = (voiceTypeOptCode in options) ? options[voiceTypeOptCode] : "m1";
         const nationality = (nationalityOptCode in options) ? options[nationalityOptCode].toUpperCase() : "US";
+        const speakingRate = (speakingRateOptCode in options) ? options[speakingRateOptCode] : 1.0;
+        // Speaking rate can only be between 0.25 and 4.0, so make sure it isnt outside that range
+        if(speakingRate < 0.25) { speakingRate = 0.25; }
+        if(speakingRate > 4.0) { speakingRate = 4.0; }
         // If no number was supplied by the user, we must append one here. Default to 1.
         if(voiceType.length == 1) { voiceType += "1"; }
         // now we need to access our custom voicesEnum to get the voice code we need.
@@ -103,7 +107,7 @@ module.exports = {
         const request = {
             input: {text: text},
             // select the language
-            voice: {languageCode: `en-${nationality}`, name: `en-${nationality}-Wavenet-${voiceTypeLetter}`},
+            voice: {languageCode: `en-${nationality}`, name: `en-${nationality}-Wavenet-${voiceTypeLetter}`, speakingRate: `${speakingRate}`},
             // type of audio encoding
             audioConfig: {audioEncoding: "MP3"}
         };
