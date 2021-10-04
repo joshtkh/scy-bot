@@ -107,9 +107,10 @@ module.exports = {
         const request = {
             input: {text: text},
             // select the language
-            voice: {languageCode: `en-${nationality}`, name: `en-${nationality}-Wavenet-${voiceTypeLetter}`, speakingRate: `${speakingRate}`},
+            voice: {languageCode: `en-${nationality}`, name: `en-${nationality}-Wavenet-${voiceTypeLetter}`},
             // type of audio encoding
-            audioConfig: {audioEncoding: "MP3"}
+            audioConfig: {audioEncoding: "MP3"},
+            speakingRate: speakingRate
         };
 
         // perform the tts request
